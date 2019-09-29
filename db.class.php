@@ -411,24 +411,5 @@ class db{
     function getMilliseconds(){
         return intval((microtime(true)*1000)."");
     }
-
-    /*function insert($table,$data){
-        $path = $this->path.$table.$this->filetype;
-        if(!file_exists($path)||!is_file($path)){
-            return $this->getMsg(false,"unknown table `{$table}` in databse `{$data}`.",0);
-        }
-        $fp = fopen($path,"a+");
-        fwrite($fp,addcslashes($data,",\n")."\n");
-        // sleep(20);
-        fclose($fp);
-        return $this->getMsg(true,"OK",1);
-    }*/
-
 }
-// $d->query("create table `ok`(`ok` int(11) primary key , `why` string(100))");
-// $d->query("Update table `ok`(`ok` int(11),`why` string(100))");
-// var_dump($d->query("iNsert into `ok`(`0`,`asasd`)"));
-// var_dump($d->query("select * from `ok`"));
-// var_dump($d->query("select * from `ok` limit 2"));
-// var_dump($d->query("select * from `ok` limit 1,100"));
 ?>
