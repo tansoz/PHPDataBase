@@ -1,7 +1,7 @@
 <?php
 /*
-    Build By Romm Hui 2019
-    CopyRight © 2019 Tansoz. All rights reserved.
+    Build By Romm Hui 2020
+    CopyRight © 2019-2020 RommHui. All rights reserved.
 */
 class db{
 
@@ -29,7 +29,7 @@ class db{
     function query($rql){
         $this->startquery = $this->getMilliseconds();
         $rql = trim(preg_replace("/[\r\n\t]/","",$rql));
-        if(preg_match("/^(create|insert|delete|update|select)/i",$rql,$data)){
+        if(preg_match("/^(create|insert|delete|update|select|exist)/i",$rql,$data)){
             $type = strtolower($data[0]);
             switch($type){
                 case "create":
@@ -41,6 +41,9 @@ class db{
                 case "delete":
                     return $this->deleteHandler($rql);
                     break;
+                case "exist":
+                    return $this->existHandler($rql);
+                    break;
                 case "update":
                     return $this->updateHandler($rql);
                     break;
@@ -49,6 +52,25 @@ class db{
                     break;
             }
         }
+    }
+
+    function existHandler($rql){
+
+        if(preg_match("/^exist +`([^`]+)` *$/",$rql,$match)){
+
+            $name = $match[1];
+            $dbfile = $this->path.$name.$this->filetype;
+
+            if(file_exists($dbfile)){
+                return $this->getMsg(true,"OK",1);
+            }else{
+                return $this->getMsg(false,"table `{$name}` file is not existed.",0);
+            }
+
+        }
+
+        return $this->getMsg(false,"RQL have something error, check your RQL please.",0);
+
     }
 
     function deleteHandler($rql){
