@@ -28,4 +28,4 @@ or
 select * from \`[table name]\` limit [length]
 
 ## exist
-exist `[table_name]`
+exist \`[table_name]\`
