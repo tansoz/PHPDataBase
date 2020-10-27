@@ -26,3 +26,6 @@ delete from \`[table name]\` where \`rows\` = \`[row num]\`
 select * from \`[table name]\` limit [offset],[length]
 or
 select * from \`[table name]\` limit [length]
+
+## exist
+exist `[table_name]`
